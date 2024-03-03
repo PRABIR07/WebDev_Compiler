@@ -7,8 +7,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentLanguage } from "@/redux/slices/compilerSlice";
+import { Rootstate } from "@/redux/store";
+import { InitialStateType } from "../redux/slices/compilerSlice";
 
 export default function Headerbtn() {
+  const dispatch = useDispatch();
+  const currentLanguage = useSelector(
+    (state: Rootstate) => state.compilerSlice.currentLanguage
+  );
   return (
     <div className="h-[50px] flex items-center justify-between p-2 bg-black  ">
       <div className="flex gap-2">
@@ -30,7 +38,14 @@ export default function Headerbtn() {
         </Button>
       </div>
       <div className="flex gap-1 items-center">
-        <Select defaultValue="html">
+        <Select
+          defaultValue={currentLanguage}
+          onValueChange={(value) =>
+            dispatch(
+              setCurrentLanguage(value as InitialStateType["currentLanguage"])
+            )
+          }
+        >
           <p>Language:</p>
           <SelectTrigger className="w-[140px] bg-gray-800 focus:ring-0 outline-none">
             <SelectValue />

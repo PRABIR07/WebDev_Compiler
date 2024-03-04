@@ -13,10 +13,10 @@ import { Rootstate } from "@/redux/store";
 import { InitialStateType } from "../redux/slices/compilerSlice";
 
 export default function Headerbtn() {
-  const dispatch = useDispatch();
   const currentLanguage = useSelector(
-    (state: Rootstate) => state.compilerSlice.currentLanguage
+    (state: Rootstate) => state.compiler.currentLanguage
   );
+  const dispatch = useDispatch();
   return (
     <div className="h-[50px] flex items-center justify-between p-2 bg-black  ">
       <div className="flex gap-2">

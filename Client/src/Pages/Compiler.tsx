@@ -1,5 +1,7 @@
 import Editor from "@/components/Editor";
 import Headerbtn from "@/components/Headerbtn";
+import OutputCode from "@/components/OutputCode";
+
 import {
   ResizableHandle,
   ResizablePanel,
@@ -22,7 +24,7 @@ export default function Compiler() {
           className="h-[calc(100dvh-60px)] min-w-[350px]"
           defaultSize={50}
         >
-          hello world!
+          <OutputCode />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

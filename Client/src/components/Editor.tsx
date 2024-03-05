@@ -16,8 +16,6 @@ export default function Editor() {
   const dispatch = useDispatch();
 
   const onChange = useCallback((value: string) => {
-    // console.log("val:", typeof val);
-
     dispatch(updateCodeValue(value));
   }, []);
   return (

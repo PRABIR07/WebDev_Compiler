@@ -36,3 +36,19 @@ npm i @uiw/codemirror-theme-dracula - for dracula theme
 npm i @uiw/codemirror-extensions-langs - so that it support all language
 npm install lucide-react - react icon
 npm i react-redux @reduxjs/toolkit
+npm i axios
+
+Server:
+npm install typescript -g
+tsc --init
+npm init -y
+
+- Changes in the tsconfig.json : open root and add "rootDir":"./src" and "outDir": "./dist",  
+  "target": "ES2020",
+
+npm i express
+npm i @types/express
+npm i cors @types/cors
+npm i nodemon
+npm i -D ts-node
+npm i dotenv mongoose

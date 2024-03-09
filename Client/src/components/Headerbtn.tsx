@@ -11,8 +11,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentLanguage } from "@/redux/slices/compilerSlice";
 import { Rootstate } from "@/redux/store";
 import { InitialStateType } from "../redux/slices/compilerSlice";
+import { handleError } from "@/utils/handleError";
+import axios from "axios";
 
 export default function Headerbtn() {
+  const fullCode = useSelector((state: Rootstate) => {
+    state.compiler.fullCode;
+  });
+  const handleSavebtn = async () => {
+    try {
+      const response = await axios.post("localhost:4000/compiler/save", {
+        fullCode: fullCode,
+      });
+      console.log(response.data);
+    } catch (error) {
+      handleError(error);
+    }
+  };
   const currentLanguage = useSelector(
     (state: Rootstate) => state.compiler.currentLanguage
   );
@@ -21,6 +36,7 @@ export default function Headerbtn() {
     <div className="h-[50px] flex items-center justify-between p-2 bg-black  ">
       <div className="flex gap-2">
         <Button
+          onClick={handleSavebtn}
           variant="save"
           className="flex items-center justify-center gap-1"
         >

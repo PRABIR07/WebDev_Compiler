@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { ExternalLink, SaveAll } from "lucide-react";
+import { ExternalLink, Loader2, SaveAll } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -13,19 +13,28 @@ import { Rootstate } from "@/redux/store";
 import { InitialStateType } from "../redux/slices/compilerSlice";
 import { handleError } from "@/utils/handleError";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Headerbtn() {
+  const [saveLoading, setSaveLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
   const fullCode = useSelector((state: Rootstate) => {
-    state.compiler.fullCode;
+    return state.compiler.fullCode;
   });
   const handleSavebtn = async () => {
+    setSaveLoading(true);
+
     try {
-      const response = await axios.post("localhost:4000/compiler/save", {
+      const response = await axios.post("http://localhost:4000/compiler/save", {
         fullCode: fullCode,
       });
-      console.log(response.data);
+
+      navigate(`/compiler/${response.data.url}`, { replace: true });
     } catch (error) {
       handleError(error);
+    } finally {
+      setSaveLoading(false);
     }
   };
   const currentLanguage = useSelector(
@@ -39,10 +48,18 @@ export default function Headerbtn() {
           onClick={handleSavebtn}
           variant="save"
           className="flex items-center justify-center gap-1"
+          disabled={saveLoading}
         >
           {" "}
-          <SaveAll size={16} />
-          Save
+          {saveLoading ? (
+            <>
+              <Loader2 className="animate-spin" /> Saving...
+            </>
+          ) : (
+            <>
+              <SaveAll size={16} /> Save
+            </>
+          )}
         </Button>
         <Button
           variant="share"
@@ -76,3 +93,5 @@ export default function Headerbtn() {
     </div>
   );
 }
+
+//

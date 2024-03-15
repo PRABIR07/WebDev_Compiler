@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { ExternalLink, Loader2, SaveAll } from "lucide-react";
+import { Code, Copy, ExternalLink, Loader2, SaveAll } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -24,6 +24,7 @@ import { handleError } from "@/utils/handleError";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Headerbtn() {
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
@@ -79,10 +80,34 @@ export default function Headerbtn() {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+              <DialogTitle className="flex gap-1 items-center justify-center ">
+                <Code />
+                Showcase your Code !
+              </DialogTitle>
+              <DialogDescription className="flex flex-col gap-2">
+                <div className="flex gap-1 items-center">
+                  <input
+                    type="text"
+                    disabled
+                    className="w-full px-2 py-2 rounded text-yellow-50 select-none"
+                    value={window.location.href}
+                  />
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      window.navigator.clipboard.writeText(
+                        window.location.href
+                      );
+                      toast("URL copied to the clipboard");
+                    }}
+                  >
+                    <Copy size={14} />
+                  </Button>
+                </div>
+
+                <p className="text-center">
+                  Share this URL to others for Collaboration
+                </p>
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
@@ -111,5 +136,3 @@ export default function Headerbtn() {
     </div>
   );
 }
-
-//

@@ -28,11 +28,13 @@
     "code-mirror-themes": "^1.0.0",
     "framer-motion": "^11.0.8",
     "lucide-react": "^0.341.0",
+    "next-themes": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-resizable-panels": "^2.0.11",
     "react-router-dom": "^6.22.1",
+    "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },

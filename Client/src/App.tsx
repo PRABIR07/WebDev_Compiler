@@ -7,10 +7,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Home from "./Pages/Home";
 import Compiler from "./Pages/Compiler";
 import Error from "./Pages/Error";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <div>
+      <Toaster position="bottom-right" />
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Header />
         <Routes>

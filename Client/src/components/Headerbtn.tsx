@@ -7,6 +7,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentLanguage } from "@/redux/slices/compilerSlice";
 import { Rootstate } from "@/redux/store";
@@ -42,7 +51,7 @@ export default function Headerbtn() {
   );
   const dispatch = useDispatch();
   return (
-    <div className="h-[50px] flex items-center justify-between p-2 bg-black  ">
+    <div className="h-[50px] flex items-center justify-between p-2 bg-black">
       <div className="flex gap-2">
         <Button
           onClick={handleSavebtn}
@@ -61,14 +70,23 @@ export default function Headerbtn() {
             </>
           )}
         </Button>
-        <Button
-          variant="share"
-          className="flex items-center justify-center gap-1"
-        >
-          {" "}
-          <ExternalLink size={16} />
-          Share
-        </Button>
+
+        <Dialog>
+          <DialogTrigger className=" px-3 py-1 rounded-md flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700">
+            {" "}
+            <ExternalLink size={16} />
+            Share
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Are you absolutely sure?</DialogTitle>
+              <DialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="flex gap-1 items-center">
         <Select

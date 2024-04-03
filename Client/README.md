@@ -52,3 +52,7 @@ npm i cors @types/cors
 npm i nodemon
 npm i -D ts-node
 npm i dotenv mongoose
+
+npm i bcrypt
+npm i @types/bcrypt
+npm i jsonwebtoken @types/jsonwebtoken

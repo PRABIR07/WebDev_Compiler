@@ -1,0 +1,5 @@
+._formbg {
+  width: 100%;
+  background-image: radial-gradient(#111415 85%, #36a6f1 90%, #0d1725 20%);
+  background-size: 50px 50px;
+}

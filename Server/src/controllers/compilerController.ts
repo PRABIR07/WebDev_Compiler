@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
 import { Code } from "../models/CodeSchema";
+import { fullCodeType } from "../types/compilerTypes";
 
 export const saveCode = async (req: Request, res: Response) => {
-  const { fullCode } = req.body;
+  const fullCode: fullCodeType = req.body;
+
+  if (!fullCode.html && !fullCode.css && !fullCode.javascript) {
+    return res.status(400).send({ message: "Can not be code empty!" });
+  }
 
   try {
     const newCode = await Code.create({ fullCode: fullCode });
-    console.log(fullCode);
+
     return res.status(201).send({ url: newCode._id, status: "saved" });
   } catch (error) {
     res.status(500).send({ message: "Something is went wrong in save", error });
@@ -15,7 +20,6 @@ export const saveCode = async (req: Request, res: Response) => {
 
 export const loadCode = async (req: Request, res: Response) => {
   const { urlId } = req.body;
-  console.log(urlId);
   try {
     const existingCode = await Code.findById(urlId);
 

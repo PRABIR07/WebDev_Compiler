@@ -36,19 +36,19 @@ export const signup = async (req: Request, res: Response) => {
       }
     );
 
-    // res.cookie("token", jwtToken, {
-    //   path: "/",
-    //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-    //   httpOnly: true,
-    //   sameSite: "lax",
-    // });
+    res.cookie("token", jwtToken, {
+      path: "/",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      httpOnly: true,
+      sameSite: "lax",
+    });
 
-    // return res.status(201).send({
-    //   username: user.username,
-    //   picture: user.picture,
-    //   email: user.email,
-    //   savedCodes: user.finalCodes,
-    // });
+    return res.status(201).send({
+      username: user.username,
+      picture: user.picture,
+      email: user.email,
+      savedCodes: user.finalCodes,
+    });
   } catch (error) {
     return res.status(500).send({ message: "Error signing up!", error: error });
   }
@@ -89,19 +89,19 @@ export const login = async (req: Request, res: Response) => {
       }
     );
 
-    // res.cookie("token", jwtToken, {
-    //   path: "/",
-    //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-    //   httpOnly: true,
-    //   sameSite: "lax",
-    // });
+    res.cookie("token", jwtToken, {
+      path: "/",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      httpOnly: true,
+      sameSite: "lax",
+    });
 
-    // return res.status(200).send({
-    //   username: existingUser.username,
-    //   picture: existingUser.picture,
-    //   email: existingUser.email,
-    //   savedCodes: existingUser.finalCodes,
-    // });
+    return res.status(200).send({
+      username: existingUser.username,
+      picture: existingUser.picture,
+      email: existingUser.email,
+      savedCodes: existingUser.finalCodes,
+    });
   } catch (error) {
     return res.status(500).send({ message: "Error log in!", error: error });
   }

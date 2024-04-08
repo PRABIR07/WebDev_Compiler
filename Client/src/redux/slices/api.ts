@@ -4,6 +4,7 @@ import { InitialStateType } from "./compilerSlice";
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:4000",
+    credentials: "include",
   }),
 
   endpoints: (builder) => ({
@@ -17,7 +18,28 @@ export const api = createApi({
         body: fullCode,
       }),
     }),
+
+    loadCode: builder.mutation<
+      { fullCode: InitialStateType["fullCode"] },
+      { urlId: string }
+    >({
+      query: (body) => ({
+        url: "/compiler/load",
+        method: "POST",
+        body: body,
+      }),
+    }),
+    login: builder.mutation<userInfoType, { userId: string; password: string }>(
+      {
+        query: (body) => ({
+          url: "/user/login",
+          method: "POST",
+          body: body,
+        }),
+      }
+    ),
   }),
 });
 
-export const { useSaveCodeMutation } = api;
+export const { useSaveCodeMutation, useLoadCodeMutation, useLoginMutation } =
+  api;
